@@ -1,13 +1,16 @@
-import { AvailabilitySlotType, AvailabilityTimeSlot } from '@booker25/sdk/dist/cjs/time-slots/availability-time-slot'
+import { AvailabilitySlotType } from '@booker25/sdk/dist/cjs/time-slots/availability-time-slot'
 import dayjs, { Dayjs } from 'dayjs'
+import Resource from '@booker25/sdk/dist/cjs/s-objects/resource'
 
 export interface Timeslot {
+  id: string
   start: Dayjs
   end: Dayjs
+  resource: Resource
 }
 
-export function calcTimeslots (slots?: AvailabilityTimeSlot[]): Timeslot[] {
-  if (slots === undefined) {
+export function calcTimeslots (resource?: Resource): Timeslot[] {
+  if (resource === undefined) {
     return []
   }
 
@@ -15,14 +18,19 @@ export function calcTimeslots (slots?: AvailabilityTimeSlot[]): Timeslot[] {
     start.clone().add(parseInt(process.env.REACT_APP_TIMESLOT_LENGTH ?? '30'), 'minutes')
   )
 
-  return slots
+  return resource
+    .getTimeSlots()
     .filter(({ type }) => type === AvailabilitySlotType.OPEN)
     .reduce<Timeslot[]>((slots, { startOfSlot, endOfSlot }) => {
     const additionalSlots: Timeslot[] = []
     for (let pointer = dayjs(startOfSlot); pointer.isBefore(dayjs(endOfSlot)); pointer = endTimeslot(pointer)) {
+      const end = endTimeslot(pointer)
+
       additionalSlots.push({
+        id: `${resource.id}-${pointer.unix()}-${end.unix()}`,
         start: pointer.clone(),
-        end: endTimeslot(pointer)
+        end: endTimeslot(pointer),
+        resource
       })
     }
 

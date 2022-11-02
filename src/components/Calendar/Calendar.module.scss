@@ -1,0 +1,91 @@
+@import '../../colors';
+@import '../../spacing';
+
+.calendar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: $calendarHeaderHeight 1fr;
+
+  grid-template-areas:
+          "title controls"
+          "content content";
+
+  column-gap: 1.5rem;
+
+  &Title {
+    grid-area: title;
+
+    align-self: center;
+
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+  }
+
+  &Controls {
+    grid-area: controls;
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+    font-size: 0.875rem;
+
+    button {
+      cursor: pointer;
+
+      &[disabled] {
+        cursor: unset;
+      }
+    }
+  }
+
+  &Content {
+    grid-area: content;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 1.25rem;
+  }
+
+  &Header {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 2.5rem;
+  }
+
+  &Day {
+    border-radius: 100%;
+    background-color: $dark-bg;
+
+    height: 2.5rem;
+    width: 2.5rem;
+
+    border: 2px solid lighten($dark-bg, 16%);
+    color: $light-fg;
+
+    cursor: pointer;
+
+    &[disabled] {
+      opacity: 0.2;
+      cursor: none;
+      pointer-events: none;
+    }
+
+    &OutsideOfMonth {
+      opacity: 0 !important;
+      cursor: none;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: lighten($dark-bg, 16%);
+    }
+
+    &Selected {
+      background-color: $orange;
+      border-color: $orange;
+    }
+  }
+}

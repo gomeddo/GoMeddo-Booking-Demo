@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+.app {
+    display: block;
+    width: 1080px;
+}
