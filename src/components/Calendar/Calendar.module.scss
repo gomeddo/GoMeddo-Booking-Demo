@@ -28,14 +28,20 @@
 
     align-items: center;
 
-    gap: 0.5rem;
     font-size: 0.875rem;
 
     button {
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      padding: 0 0.5rem;
 
       &[disabled] {
         cursor: unset;
+        opacity: 0;
       }
     }
   }
@@ -84,8 +90,8 @@
     }
 
     &Selected {
-      background-color: $orange;
-      border-color: $orange;
+      background-color: $accent;
+      border-color: $accent;
     }
   }
 }

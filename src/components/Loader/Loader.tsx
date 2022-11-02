@@ -10,10 +10,10 @@ export default function Loader ({ style }: LoaderProps): JSX.Element {
     <Player
       autoplay
       loop
-      src='https://assets5.lottiefiles.com/packages/lf20_sueuqtme.json'
+      src={require('./Loader.json')}
       style={style ?? {
-        width: '10rem',
-        height: '10rem'
+        width: '8rem',
+        height: '8rem'
       }}
     />
   )

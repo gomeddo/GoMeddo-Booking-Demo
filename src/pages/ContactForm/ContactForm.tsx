@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import Reservation from '@booker25/sdk/dist/cjs/s-objects/reservation'
-import { useContext, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import Lead from '@booker25/sdk/dist/cjs/s-objects/lead'
 import useBooker25 from '../../hooks/useBooker25'
@@ -8,7 +8,10 @@ import { Input } from '../../components/Input/Input'
 import { AppointmentContext } from '../../context/AppointmentProvider'
 import Page from '../Page/Page'
 
+import { ReactComponent as Back } from '../../icons/arrow-back-round.svg'
+
 import style from './ContactForm.module.scss'
+import { TextArea } from '../../components/TextArea/TextArea'
 
 export default function ContactForm (): JSX.Element {
   const { reservation, setReservation } = useContext(AppointmentContext)
@@ -30,19 +33,31 @@ export default function ContactForm (): JSX.Element {
     }
   })
 
+  const start = useMemo(() => dayjs(reservation?.getStartDatetime()), [reservation])
+  const end = useMemo(() => dayjs(reservation?.getEndDatetime()), [reservation])
+
   return (
     <Page
       active={reservation !== undefined}
       className={style.contactForm}
       activeClassName={style.contactFormActive}
     >
-      <h3>Your Reservation</h3>
-      <p>{reservation?.getResource()?.name}</p>
-      <p>
-        {`${dayjs(reservation?.getStartDatetime()).format('HH:mm')} - ${dayjs(reservation?.getEndDatetime()).format('HH:mm')}`}
-      </p>
+      <div className={style.contactFormTitle}>Confirm your booking</div>
+      <div className={style.contactFormControls}>
+        <button onClick={() => setReservation(undefined)}>
+          <Back />
+        </button>
+        <span>
+          {start?.format('L')}
+          {' - '}
+          {start?.format('LT')}
+          {' - '}
+          {end?.format('LT')}
+        </span>
+      </div>
 
       <form
+        className={style.contactFormInputs}
         onSubmit={async (e) => {
           e.preventDefault()
 
@@ -55,15 +70,42 @@ export default function ContactForm (): JSX.Element {
           }
         }}
       >
-        {/* eslint-disable-next-line react/jsx-no-undef */}
-        <Input label='First Name' onChange={setFirstName} value={firstName} />
-        <Input label='Last Name' onChange={setLastName} value={lastName} />
-        <Input label='Email' onChange={setEmail} value={email} type='email' />
-        <Input label='Company' onChange={setCompany} value={company} type='text' />
-        <button
-          type='submit'
-        >
-          Create appointment
+        <Input
+          label='First Name'
+          onChange={setFirstName}
+          value={firstName}
+        />
+        <Input
+          label='Last Name'
+          onChange={setLastName}
+          value={lastName}
+        />
+        <Input
+          label='Email Address'
+          onChange={setEmail}
+          value={email}
+          type='email'
+        />
+        <Input
+          label='Mobile number'
+          onChange={setEmail}
+          value={email}
+        />
+        <Input
+          className={style.span2}
+          label='Company name'
+          onChange={setCompany}
+          value={company}
+          type='text'
+        />
+        <TextArea
+          className={style.span2}
+          label='Your Message'
+          onChange={setCompany}
+          value={company}
+        />
+        <button type='submit'>
+          Confirm
         </button>
       </form>
     </Page>

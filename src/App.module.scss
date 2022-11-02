@@ -1,6 +1,6 @@
 .app {
   position: relative;
-  display: block;
+  //display: block;
   overflow: hidden;
   box-sizing: border-box;
   height: 100%;
@@ -9,4 +9,8 @@
   font-size: 16px;
   font-family: sans-serif;
   border-radius: 0.5rem;
+
+  display: grid;
+  grid-template-columns: 100% 100%;
+  grid-template-rows: auto;
 }

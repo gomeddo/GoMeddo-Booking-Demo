@@ -11,6 +11,8 @@ import Calendar, { CalendarApi } from '../../components/Calendar/Calendar'
 import classnames from 'classnames'
 import Loader from '../../components/Loader/Loader'
 
+import { ReactComponent as ArrowWhite } from '../../icons/arrow-white.svg'
+
 export default function CalendarPage (): JSX.Element {
   const b25 = useBooker25()
 
@@ -173,7 +175,8 @@ export default function CalendarPage (): JSX.Element {
             }
           })}
         >
-          Next ---&gt;
+          Next
+          <ArrowWhite />
         </button>
       </div>
     </Page>
