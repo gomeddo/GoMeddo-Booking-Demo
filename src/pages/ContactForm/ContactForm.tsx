@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import Reservation from '@booker25/sdk/dist/cjs/s-objects/reservation'
-import { useContext, useMemo, useState } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { PropsWithChildren, useContext, useMemo, useState } from 'react'
+import { useMutation } from 'react-query'
 import Lead from '@booker25/sdk/dist/cjs/s-objects/lead'
 import useBooker25 from '../../hooks/useBooker25'
 import { Input } from '../../components/Input/Input'
@@ -9,6 +9,8 @@ import { AppointmentContext } from '../../context/AppointmentProvider'
 import Page from '../Page/Page'
 
 import { ReactComponent as Back } from '../../icons/arrow-back-round.svg'
+import { ReactComponent as Error } from '../../icons/error.svg'
+import { ReactComponent as Success } from '../../icons/success.svg'
 
 import style from './ContactForm.module.scss'
 import { TextArea } from '../../components/TextArea/TextArea'
@@ -16,10 +18,40 @@ import classnames from 'classnames'
 import { Checkbox } from '../../components/Checkbox/Checkbox'
 import LoaderButton from '../../components/LoaderButton/LoaderButton'
 
+interface ActionCompleteSuccess {
+  variant: 'success'
+  onBack?: undefined
+}
+
+interface ActionCompleteError {
+  variant: 'error'
+  onBack?: () => void
+}
+
+function ActionComplete ({ variant, onBack, children }: PropsWithChildren<ActionCompleteSuccess | ActionCompleteError>): JSX.Element {
+  return (
+    <div className={style.actionComplete}>
+      {variant === 'success' && <Success className={style.actionCompleteIcon} />}
+      {variant === 'error' && <Error className={style.actionCompleteIcon} />}
+
+      {children}
+
+      {onBack !== undefined && (
+        <LoaderButton onClick={onBack}>
+          Try Again
+        </LoaderButton>
+      )}
+    </div>
+  )
+}
+
 export default function ContactForm (): JSX.Element {
   const { reservation, setReservation } = useContext(AppointmentContext)
 
   const b25 = useBooker25()
+
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [showError, setShowError] = useState(false)
 
   const [firstName, setFirstName] = useState<string>('')
   const [lastName, setLastName] = useState<string>('')
@@ -29,14 +61,11 @@ export default function ContactForm (): JSX.Element {
   const [notes, setNotes] = useState<string>('')
   const [tos, setTos] = useState(false)
 
-  const queryClient = useQueryClient()
   const reservationMutation = useMutation(async (data: Reservation) => {
     return await b25.saveReservation(data)
   }, {
-    onSuccess: async (data) => {
-      const date = dayjs(data.getStartDatetime())
-      await queryClient.invalidateQueries(['resources', date?.format('YYYY-MM-DD')])
-    }
+    onSuccess: async (data) => setShowSuccess(true),
+    onError: async () => setShowError(true)
   })
 
   const start = useMemo(() => dayjs(reservation?.getStartDatetime()), [reservation])
@@ -80,8 +109,6 @@ export default function ContactForm (): JSX.Element {
             reservation.setCustomProperty('B25__Notes__c', notes)
 
             await reservationMutation.mutateAsync(reservation)
-
-            setReservation(undefined)
           }
         }}
       >
@@ -155,6 +182,49 @@ export default function ContactForm (): JSX.Element {
           </LoaderButton>
         </div>
       </form>
+      {
+        showSuccess && (
+          <ActionComplete variant='success'>
+            <span className={style.actionCompleteTitle}>
+              Thank you for your demo request!
+            </span>
+            <span className={style.actionCompleteTime}>
+              {start?.format('L')}
+              {' - '}
+              {start?.format('LT')}
+              {' - '}
+              {end?.format('LT')}
+            </span>
+            <p>
+              Your request has been confirmed and a confirmation has been sent to your email.
+            </p>
+            <p>
+              See you soon!
+            </p>
+          </ActionComplete>
+        )
+      }
+      {
+        showError && (
+          <ActionComplete
+            variant='error'
+            onBack={() => setShowError(false)}
+          >
+            <span className={style.actionCompleteTitle}>
+              Dear Visitor,
+            </span>
+            <p>
+              Currently, we’re experiencing difficulties with our demo requests. Please contact us via info@booker25.com if you would like to make a reservation for a demo. You can also contact us by phone at +31 20 750 8350 or try again.
+            </p>
+            <p>
+              Apologies for any inconvenience caused,
+            </p>
+            <p>
+              Team Booker25
+            </p>
+          </ActionComplete>
+        )
+      }
     </Page>
   )
 }

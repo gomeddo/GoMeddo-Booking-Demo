@@ -16,6 +16,7 @@
     text-align: center;
     font-size: 2rem;
     font-weight: 500;
+    font-family: 'ITC Avant Garde Gothic', sans-serif;
   }
 
   &Controls {
@@ -82,4 +83,57 @@
 
 .colSpan2 {
   grid-column: span 2;
+}
+
+.actionComplete {
+  background-color: $alt-bg;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 2rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2rem;
+
+  p {
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 305;
+    max-width: 25rem;
+    text-align: center;
+  }
+
+  &Title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    max-width: 25rem;
+    text-align: center;
+    font-family: 'ITC Avant Garde Gothic', sans-serif;
+  }
+
+  &Time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1rem;
+    padding: 1rem 3.5rem;
+    background-color: $light-fg;
+    color: $dark-bg;
+    font-size: 1rem;
+    font-weight: 315;
+    border-radius: 1.5rem;
+  }
+
+  &Icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
