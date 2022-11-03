@@ -27,16 +27,19 @@
     margin-top: 2.5rem;
     margin-bottom: 3.5rem;
 
-    button {
+    &Back {
       grid-area: back;
-      border-radius: 100%;
-      border: none;
-      background: transparent;
+      --loader-button-border-radius: 100%;
+      --loader-button-background-color: #{$alt-bg};
+      --loader-button-padding: 0;
+
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0;
-      cursor: pointer;
+
+      &:hover {
+        --loader-button-hover-background-color: #{darken($alt-bg, 5%)}
+      }
     }
 
     span {
@@ -58,8 +61,25 @@
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: auto;
   }
+
+  &Notes {
+    font-family: sans-serif;
+    resize: none;
+
+  }
+
+  &Submit {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+  }
+
+  &Checkbox {
+    align-self: stretch;
+    margin-bottom: 2.5rem;
+  }
 }
 
-.span2 {
+.colSpan2 {
   grid-column: span 2;
 }

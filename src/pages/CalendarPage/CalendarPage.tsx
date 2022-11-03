@@ -1,5 +1,5 @@
 import useBooker25 from '../../hooks/useBooker25'
-import { Ref, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { Ref, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import { useQuery } from 'react-query'
 import { calcTimeslots, Timeslot } from '../../utils'
@@ -12,6 +12,7 @@ import classnames from 'classnames'
 import Loader from '../../components/Loader/Loader'
 
 import { ReactComponent as ArrowWhite } from '../../icons/arrow-white.svg'
+import LoaderButton from '../../components/LoaderButton/LoaderButton'
 
 export default function CalendarPage (): JSX.Element {
   const b25 = useBooker25()
@@ -72,6 +73,21 @@ export default function CalendarPage (): JSX.Element {
   ), [timeslots])
 
   const calendarRef = useRef<CalendarApi>()
+  const [timeslotsList, setTimeslotsList] = useState<HTMLOListElement | null>(null)
+
+  const [showTopGradient, setShowTopGradient] = useState(false)
+  const [showBottomGradient, setShowBottomGradient] = useState(false)
+
+  const calculateShadow = useCallback((list: HTMLOListElement) => {
+    setShowTopGradient(list.scrollTop > 0)
+    setShowBottomGradient(list.scrollTop + list.offsetHeight < list.scrollHeight)
+  }, [])
+
+  useEffect(() => {
+    if (timeslotsList !== null) {
+      calculateShadow(timeslotsList)
+    }
+  }, [calculateShadow, timeslotsList])
 
   return (
     <Page
@@ -98,7 +114,8 @@ export default function CalendarPage (): JSX.Element {
       </div>
       <div className={style.firstSlotFinder}>
         <span>Search fist available time slot</span>
-        <button
+        <LoaderButton
+          className={style.firstSlotFinderSearch}
           onClick={() => {
             if (timeslots.length > 0) {
               setSelectedTimeslot(timeslots[0])
@@ -108,26 +125,33 @@ export default function CalendarPage (): JSX.Element {
           }}
         >
           Search
-        </button>
+        </LoaderButton>
       </div>
       <div className={style.timeslotsHeader}>
         Select Time
       </div>
       <div className={style.timeslots}>
-
+        <div
+          className={classnames(style.timeslotsGradient, {
+            [style.timeslotsGradientVisible]: showTopGradient
+          })}
+        />
         {
           isLoading
             ? (
               <div className={style.timeslotsLoading}>
-                <Loader />
+                <Loader className={style.timeslotsLoader} />
               </div>
             )
             : (
-              <ol>
+              <ol
+                ref={setTimeslotsList}
+                onScroll={({ target }) => calculateShadow(target as HTMLOListElement)}
+              >
                 {
                   (timeslotsByDate[date?.format('YYYY-MM-DD') ?? ''] ?? []).map((timeslot) => (
                     <li key={timeslot.id}>
-                      <button
+                      <LoaderButton
                         className={
                           classnames(style.timeslotsTimeslot, {
                             [style.timeslotsTimeslotSelected]: selectedTimeslot?.id === timeslot.id
@@ -136,13 +160,18 @@ export default function CalendarPage (): JSX.Element {
                         onClick={() => setSelectedTimeslot(timeslot)}
                       >
                         {timeslot.start.format('LT')}
-                      </button>
+                      </LoaderButton>
                     </li>
                   ))
                 }
               </ol>
             )
         }
+        <div
+          className={classnames(style.timeslotsGradient, style.timeslotsGradientBottom, {
+            [style.timeslotsGradientVisible]: showBottomGradient
+          })}
+        />
       </div>
       <div className={style.selectedTimeslot}>
         <div className={style.selectedTimeslotDateTime}>
@@ -161,7 +190,8 @@ export default function CalendarPage (): JSX.Element {
               )
           }
         </div>
-        <button
+        <LoaderButton
+          className={style.selectedTimeslotNext}
           disabled={selectedTimeslot === undefined}
           onClick={() => setReservation(() => {
             if (selectedTimeslot !== undefined) {
@@ -177,7 +207,7 @@ export default function CalendarPage (): JSX.Element {
         >
           Next
           <ArrowWhite />
-        </button>
+        </LoaderButton>
       </div>
     </Page>
   )

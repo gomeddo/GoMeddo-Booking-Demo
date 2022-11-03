@@ -1,20 +1,20 @@
 import { Player } from '@lottiefiles/react-lottie-player'
-import { CSSProperties } from 'react'
+import classnames from 'classnames'
+
+import style from './Loader.module.scss'
 
 interface LoaderProps {
-  style?: CSSProperties
+  className?: string
+  variant?: 'black' | 'white'
 }
 
-export default function Loader ({ style }: LoaderProps): JSX.Element {
+export default function Loader ({ variant = 'black', className }: LoaderProps): JSX.Element {
   return (
     <Player
+      className={classnames(className, style.loader)}
       autoplay
       loop
-      src={require('./Loader.json')}
-      style={style ?? {
-        width: '8rem',
-        height: '8rem'
-      }}
+      src={require(`./Loader-${variant}.json`)}
     />
   )
 }

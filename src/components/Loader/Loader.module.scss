@@ -1,0 +1,5 @@
+.loader {
+  transform: scale(4);
+  width: var(--loader-size, 300px);
+  height: var(--loader-size, 300px);
+}

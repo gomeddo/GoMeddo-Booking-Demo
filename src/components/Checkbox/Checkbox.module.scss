@@ -1,0 +1,39 @@
+@import '../../colors';
+
+.checkbox {
+  border-radius: 1.5rem;
+  padding: 0 2rem;
+  font-size: 0.875rem;
+  border: none;
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  align-items: flex-start;
+  gap: 1rem;
+
+  input[type=checkbox] {
+    display: none;
+
+    &:checked ~ .fauxCheckbox {
+      background-color: black;
+      border-color: black;
+    }
+  }
+
+  .fauxCheckbox {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $light-fg;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 4px;
+  }
+
+  label {
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 315;
+    line-height: 1.375rem;
+  }
+}

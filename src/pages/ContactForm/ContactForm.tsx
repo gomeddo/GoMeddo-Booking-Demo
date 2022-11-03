@@ -12,6 +12,9 @@ import { ReactComponent as Back } from '../../icons/arrow-back-round.svg'
 
 import style from './ContactForm.module.scss'
 import { TextArea } from '../../components/TextArea/TextArea'
+import classnames from 'classnames'
+import { Checkbox } from '../../components/Checkbox/Checkbox'
+import LoaderButton from '../../components/LoaderButton/LoaderButton'
 
 export default function ContactForm (): JSX.Element {
   const { reservation, setReservation } = useContext(AppointmentContext)
@@ -21,7 +24,10 @@ export default function ContactForm (): JSX.Element {
   const [firstName, setFirstName] = useState<string>('')
   const [lastName, setLastName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
+  const [phone, setPhone] = useState<string>('')
   const [company, setCompany] = useState<string>('')
+  const [notes, setNotes] = useState<string>('')
+  const [tos, setTos] = useState(false)
 
   const queryClient = useQueryClient()
   const reservationMutation = useMutation(async (data: Reservation) => {
@@ -44,9 +50,12 @@ export default function ContactForm (): JSX.Element {
     >
       <div className={style.contactFormTitle}>Confirm your booking</div>
       <div className={style.contactFormControls}>
-        <button onClick={() => setReservation(undefined)}>
+        <LoaderButton
+          className={style.contactFormControlsBack}
+          onClick={() => setReservation(undefined)}
+        >
           <Back />
-        </button>
+        </LoaderButton>
         <span>
           {start?.format('L')}
           {' - '}
@@ -63,50 +72,88 @@ export default function ContactForm (): JSX.Element {
 
           if (reservation !== undefined) {
             const lead = new Lead(firstName, lastName, email)
+
             lead.setCustomProperty('Company', company)
+            lead.setCustomProperty('MobilePhone', phone)
             reservation?.setLead(lead)
+
+            reservation.setCustomProperty('B25__Notes__c', notes)
+
             await reservationMutation.mutateAsync(reservation)
+
             setReservation(undefined)
           }
         }}
       >
         <Input
+          required
+          name='first_name'
           label='First Name'
           onChange={setFirstName}
           value={firstName}
         />
         <Input
+          required
+          name='last_name'
           label='Last Name'
           onChange={setLastName}
           value={lastName}
         />
         <Input
+          required
+          name='email'
           label='Email Address'
           onChange={setEmail}
           value={email}
           type='email'
         />
         <Input
-          label='Mobile number'
-          onChange={setEmail}
-          value={email}
+          required
+          name='phone'
+          label='Mobile Number'
+          onChange={setPhone}
+          value={phone}
         />
         <Input
-          className={style.span2}
-          label='Company name'
+          required
+          name='company'
+          className={style.colSpan2}
+          label='Company Name'
           onChange={setCompany}
           value={company}
           type='text'
         />
         <TextArea
-          className={style.span2}
+          className={classnames(style.colSpan2, style.contactFormNotes)}
+          name='notes'
+          rows={5}
           label='Your Message'
-          onChange={setCompany}
-          value={company}
+          onChange={setNotes}
+          value={notes}
         />
-        <button type='submit'>
-          Confirm
-        </button>
+        <div className={classnames(style.colSpan2, style.contactFormSubmit)}>
+          <Checkbox
+            required
+            className={style.contactFormCheckbox}
+            checked={tos}
+            onChange={setTos}
+            label={
+              <>
+                I give permission to save the data I have entered here and use this data to contact me.
+                <br />
+                More information in our privacy statement.
+              </>
+            }
+          />
+          <LoaderButton
+            loading={reservationMutation.isLoading}
+            disabled={!tos || reservationMutation.isLoading}
+            type='submit'
+            className={style.contactFormConfirm}
+          >
+            Confirm
+          </LoaderButton>
+        </div>
       </form>
     </Page>
   )
