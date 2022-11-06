@@ -1,14 +1,13 @@
 @import '../../colors';
 
 .checkbox {
-  border-radius: 1.5rem;
-  padding: 0 2rem;
+  padding: 0 3.2rem;
   font-size: 0.875rem;
   border: none;
   display: grid;
-  grid-template-columns: 1.5rem 1fr;
+  grid-template-columns: 2.4rem 1fr;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.6rem;
 
   input[type=checkbox] {
     display: none;
@@ -25,15 +24,15 @@
     align-items: center;
     justify-content: center;
     border: 1px solid $light-fg;
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 4px;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 0.4rem;
   }
 
   label {
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 1.4rem;
     font-weight: 315;
-    line-height: 1.375rem;
+    line-height: 2.2rem;
   }
 }

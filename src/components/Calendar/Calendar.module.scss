@@ -10,7 +10,7 @@
           "title controls"
           "content content";
 
-  column-gap: 1.5rem;
+  column-gap: 2.4rem;
 
   &Title {
     grid-area: title;
@@ -18,8 +18,8 @@
     align-self: center;
 
     font-weight: 500;
-    font-size: 1.25rem;
-    line-height: 2.5rem;
+    font-size: 2rem;
+    line-height: 40rem;
     font-family: 'ITC Avant Garde Gothic', sans-serif;
   }
 
@@ -29,7 +29,7 @@
 
     align-items: center;
 
-    font-size: 0.875rem;
+    font-size: 1.4rem;
 
     button {
       cursor: pointer;
@@ -38,7 +38,7 @@
       align-items: center;
       background-color: transparent;
       border: none;
-      padding: 0 0.5rem;
+      padding: 0 0.8rem;
 
       &[disabled] {
         cursor: unset;
@@ -53,21 +53,23 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
-    gap: 1.25rem;
+    gap: 2rem;
   }
 
   &Header {
     text-align: center;
-    font-size: 1rem;
-    line-height: 2.5rem;
+    font-size: 1.6rem;
+    line-height: 4rem;
   }
 
   &Day {
     border-radius: 100%;
     background-color: $dark-bg;
 
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 4rem;
+    width: 4rem;
+
+    font-size: 1.4rem;
 
     border: 2px solid lighten($dark-bg, 16%);
     color: $light-fg;
