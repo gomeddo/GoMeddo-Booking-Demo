@@ -34,7 +34,7 @@ function render (rootElement: HTMLElement | ShadowRoot): ReactDOM.Root {
 }
 
 if (process.env.REACT_APP_CUSTOM_ELEMENT === '1') {
-  class SalesAppointment extends HTMLDivElement {
+  class SalesAppointment extends HTMLElement {
     private readonly loadingPromise: Promise<void>
 
     constructor () {
@@ -57,9 +57,7 @@ if (process.env.REACT_APP_CUSTOM_ELEMENT === '1') {
     }
   }
 
-  window.customElements.define('sales-appointment', SalesAppointment, {
-    extends: 'div'
-  })
+  window.customElements.define('sales-appointment', SalesAppointment)
 } else {
   const root = document.getElementById('sales-appointment')
   if (root !== null) {
