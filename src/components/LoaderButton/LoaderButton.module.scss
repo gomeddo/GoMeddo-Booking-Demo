@@ -1,0 +1,29 @@
+@import '../../colors';
+
+.button {
+  padding: var(--loader-button-padding, 1.6rem 2.2rem);
+  line-height: var(--loader-button-line-height, 1.6rem);
+  border-radius: var(--loader-button-border-radius, 2.4rem);
+
+  background-color: var(--loader-button-background-color, #{$dark-bg});
+  border: var(--loader-button-border, none);
+  color: var(--loader-button-color, #{$light-fg});
+  font-size: var(--loader-button-font-size, 1.6rem);
+  font-weight: 315;
+
+  cursor: pointer;
+
+  &Loader {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  &[disabled] {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: var(--loader-button-hover-background-color, #{lighten($dark-bg, 20%)});
+  }
+}

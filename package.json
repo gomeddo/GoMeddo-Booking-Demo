@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@booker25/sdk": "^0.0.5",
+    "@lottiefiles/react-lottie-player": "^3.4.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -11,18 +12,20 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "classnames": "^2.3.2",
     "dayjs": "^1.11.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
     "react-scripts": "5.0.1",
+    "sass": "^1.55.0",
     "typescript": "^4.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:custom-element": "REACT_APP_CUSTOM_ELEMENT=1 react-scripts build && sh postbuild-custom-element.sh",
+    "build:custom-element:debug": "REACT_APP_CUSTOM_ELEMENT=1 react-scripts build && sh postbuild-custom-element.sh debug"
   },
   "ts-standard": {
     "ignore": [
@@ -46,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
   }
 }

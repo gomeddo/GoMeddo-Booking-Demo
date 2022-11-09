@@ -1,0 +1,100 @@
+@import '../../colors';
+@import '../../spacing';
+
+.calendar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: $calendarHeaderHeight 1fr;
+
+  grid-template-areas:
+          "title controls"
+          "content content";
+
+  column-gap: 2.4rem;
+
+  &Title {
+    grid-area: title;
+
+    align-self: center;
+
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 40rem;
+    font-family: 'ITC Avant Garde Pro MD', sans-serif;
+  }
+
+  &Controls {
+    grid-area: controls;
+    display: flex;
+
+    align-items: center;
+
+    font-size: 1.4rem;
+
+    button {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      padding: 0 0.8rem;
+
+      &[disabled] {
+        cursor: unset;
+        opacity: 0;
+      }
+    }
+  }
+
+  &Content {
+    grid-area: content;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 2rem;
+  }
+
+  &Header {
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 4rem;
+  }
+
+  &Day {
+    border-radius: 100%;
+    background-color: $dark-bg;
+
+    height: 4rem;
+    width: 4rem;
+
+    font-size: 1.4rem;
+
+    border: 2px solid lighten($dark-bg, 16%);
+    color: $light-fg;
+
+    cursor: pointer;
+
+    &[disabled] {
+      opacity: 0.2;
+      cursor: none;
+      pointer-events: none;
+    }
+
+    &OutsideOfMonth {
+      opacity: 0 !important;
+      cursor: none;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: lighten($dark-bg, 16%);
+    }
+
+    &Selected {
+      background-color: $accent;
+      border-color: $accent;
+    }
+  }
+}

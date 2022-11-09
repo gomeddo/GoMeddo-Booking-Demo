@@ -1,0 +1,16 @@
+.app {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+
+  font-size: 1.6rem;
+
+  font-family: 'Sequal Sans', sans-serif;
+  border-radius: 0.5rem;
+
+  display: grid;
+  grid-template-columns: 100% 100%;
+  grid-template-rows: auto;
+}

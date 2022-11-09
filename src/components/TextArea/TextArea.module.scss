@@ -1,0 +1,12 @@
+@import '../../colors';
+
+.textArea {
+  border-radius: 2.4rem;
+  padding: 3.2rem;
+  font-size: 1.4rem;
+  border: none;
+
+  &:focus-visible {
+    outline: 0.2rem solid $accent2;
+  }
+}
