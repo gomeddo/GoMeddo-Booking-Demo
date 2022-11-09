@@ -26,7 +26,7 @@ export default function CalendarPage (): JSX.Element {
   const [selectedTimeslot, setSelectedTimeslot] = useState<Timeslot>()
 
   const { isLoading, data } = useQuery(
-    ['resources', calendarStart?.format('YYYY-MM-DD'), calendarEnd.format('YYYY-MM-DD')],
+    ['resources', calendarStart.format('YYYY-MM-DD'), calendarEnd.format('YYYY-MM-DD')],
     async () => {
       return await b25
         .buildResourceRequest()

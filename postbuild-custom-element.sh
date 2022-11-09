@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 shopt -s extglob
 
 rm build/!(asset-manifest.json|static|index.html|style.css)

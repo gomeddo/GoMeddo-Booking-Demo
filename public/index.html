@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -10,28 +10,98 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="%PUBLIC_URL%/style.css" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>Booker25 JS SDK Example</title>
   </head>
   <body>
-  <div class="content">
-    <h1>Book your demo online</h1>
-    <p>Create a date that suits you and then book a demo</p>
-    <div id="sales-appointment" class="app"></div>
-  </div>
+  <header>
+    <div>
+      <object data="%PUBLIC_URL%/booker25.svg" type="image/svg+xml"></object>
+      <h2>
+        JS SDK Example
+      </h2>
+    </div>
+    <a class="view-on-github" href="https://github.com/booker25/js-sdk-example">
+      <img src="%PUBLIC_URL%/github.png"  alt="github" />
+      View on GitHub
+    </a>
+  </header>
+  <main>
+    <section>
+      <div>
+        <h1>Booker25 JS SDK</h1>
+        <p>This page shows an example on how to implement the Booker25 JS SDK</p>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h2>Example: Book your demo online</h2>
+        <div id="sales-appointment"></div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h3>Installing the SDK</h3>
+        <h4>NPM</h4>
+        <pre>
+          npm install @booker25/sdk
+        </pre>
+
+        <h4>Yarn</h4>
+        <pre>
+          yarn add @booker25/sdk
+        </pre>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h3>Getting timeslots for a specific resource and day</h3>
+        <pre>
+          <code>import Booker25 from '@booker25/sdk';</code>
+          <code></code>
+          <code>const b25 = new Booker25(apiKey);</code>
+          <code></code>
+          <code>b25</code>
+          <code>  .buildResourceRequest()</code>
+          <code>  .includeAllResourcesAt(resourceId)</code>
+          <code>  .withAvailableSlotsBetween(</code>
+          <code>    new Date('<%= (new Date()).getFullYear() %>-<%= (new Date()).getMonth()+1 %>-<%= (new Date()).getDate() %>'),</code>
+          <code>    new Date('<%= (new Date()).getFullYear() %>-<%= (new Date()).getMonth()+1 %>-<%= (new Date()).getDate() + 1 %>')</code>
+          <code>  )</code>
+          <code>  .getResults()</code>
+          <code>  .then((resources) => /* Do something with the resource */);</code>
+        </pre>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h3>Creating a reservation</h3>
+        <pre>
+          <code>import Booker25, { Reservation, Lead } from '@booker25/sdk';</code>
+          <code></code>
+          <code>const b25 = new Booker25(apiKey);</code>
+          <code></code>
+          <code>const resource = resources[0];</code>
+          <code>const timeslots = resource.getTimeSlots();</code>
+          <code></code>
+          <code>const reservation = new Reservation();</code>
+          <code>reservation.setResource(resource);</code>
+          <code>reservation.setStartDatetime(timeslots[0].startOfSlot);</code>
+          <code>reservation.setEndDatetime(timeslots[0].endOfSlot);</code>
+          <code></code>
+          <code>const lead = new Lead(firstName, lastName, email);</code>
+          <code>reservation.setLead(lead);</code>
+          <code></code>
+          <code>b25</code>
+          <code>  .saveReservation(reservation)</code>
+          <code>  .then((response) => /* Do something with the response */);</code>
+        </pre>
+      </div>
+    </section>
+  </main >
+  <footer>
+
+  </footer>
   </body>
 </html>
