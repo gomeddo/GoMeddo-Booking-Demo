@@ -25,9 +25,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:custom-element": "REACT_APP_CUSTOM_ELEMENT=1 react-scripts build && sh postbuild-custom-element.sh",
-    "build:custom-element:debug": "REACT_APP_CUSTOM_ELEMENT=1 react-scripts build && sh postbuild-custom-element.sh debug",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:custom-element:debug": "REACT_APP_CUSTOM_ELEMENT=1 react-scripts build && sh postbuild-custom-element.sh debug"
   },
   "ts-standard": {
     "ignore": [
