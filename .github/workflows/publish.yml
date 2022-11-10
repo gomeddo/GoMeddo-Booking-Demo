@@ -1,5 +1,8 @@
 name: Publish to Github Pages
 
+env:
+  PUBLIC_URL: https://booker25.github.io/js-sdk-example/
+
 on:
   push:
     branches: [ "main" ]
