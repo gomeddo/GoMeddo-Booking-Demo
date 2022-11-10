@@ -116,7 +116,7 @@ export default function CalendarPage (): JSX.Element {
         />
       </div>
       <div className={style.firstSlotFinder}>
-        <span>Search fist available time slot</span>
+        <span>Search first available time slot</span>
         <LoaderButton
           className={style.firstSlotFinderSearch}
           onClick={() => {
