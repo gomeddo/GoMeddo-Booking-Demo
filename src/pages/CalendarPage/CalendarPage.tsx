@@ -13,6 +13,7 @@ import Loader from '../../components/Loader/Loader'
 
 import { ReactComponent as ArrowWhite } from '../../icons/arrow-white.svg'
 import LoaderButton from '../../components/LoaderButton/LoaderButton'
+import { ConfigContext } from '../../context/ConfigProvider'
 
 export default function CalendarPage (): JSX.Element {
   const b25 = useBooker25()
@@ -25,12 +26,14 @@ export default function CalendarPage (): JSX.Element {
   const [date, setDate] = useState<Dayjs>()
   const [selectedTimeslot, setSelectedTimeslot] = useState<Timeslot>()
 
+  const { resources, timeslotLength } = useContext(ConfigContext)
+
   const { isLoading, data } = useQuery(
     ['resources', calendarStart.format('YYYY-MM-DD'), calendarEnd.format('YYYY-MM-DD')],
     async () => {
       return await b25
         .buildResourceRequest()
-        .includeAllResourcesAt(...(process.env.REACT_APP_B25_RESOURCES ?? '').split(';'))
+        .includeAllResourcesAt(...resources)
         .withAvailableSlotsBetween(
           calendarStart.toDate(),
           calendarEnd.endOf('day').toDate()
@@ -44,7 +47,7 @@ export default function CalendarPage (): JSX.Element {
       ?.getResourceIds()
       .map<Timeslot[]>((id) => {
       const resource = data?.getResource(id)
-      return calcTimeslots(resource)
+      return calcTimeslots(resource, timeslotLength)
     })
       .flatMap<Timeslot>(slot => slot)
       .sort(({ start: startA }, { start: startB }) => (

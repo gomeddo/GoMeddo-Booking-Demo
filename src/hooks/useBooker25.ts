@@ -1,11 +1,8 @@
-import { useMemo } from 'react'
-import Booker25, { Environment } from '@booker25/sdk'
+import { useContext, useMemo } from 'react'
+import Booker25 from '@booker25/sdk'
+import { ConfigContext } from '../context/ConfigProvider'
 
 export default function useBooker25 (): Booker25 {
-  return useMemo(() => (
-    new Booker25(
-      process.env.REACT_APP_API_KEY as string,
-      Environment[(process.env.REACT_APP_ENVIRONMENT ?? '') as keyof typeof Environment]
-    )
-  ), [])
+  const { apiKey, environment } = useContext(ConfigContext)
+  return useMemo(() => new Booker25(apiKey, environment), [])
 }

@@ -9,13 +9,13 @@ export interface Timeslot {
   resource: Resource
 }
 
-export function calcTimeslots (resource?: Resource): Timeslot[] {
+export function calcTimeslots (resource?: Resource, timeslotLength?: number): Timeslot[] {
   if (resource === undefined) {
     return []
   }
 
   const endTimeslot = (start: Dayjs): Dayjs => (
-    start.clone().add(parseInt(process.env.REACT_APP_TIMESLOT_LENGTH ?? '30'), 'minutes')
+    start.clone().add(timeslotLength ?? 30, 'minutes')
   )
 
   return resource
@@ -23,7 +23,7 @@ export function calcTimeslots (resource?: Resource): Timeslot[] {
     .filter(({ type }) => type === AvailabilitySlotType.OPEN)
     .reduce<Timeslot[]>((slots, { startOfSlot, endOfSlot }) => {
     const additionalSlots: Timeslot[] = []
-    for (let pointer = dayjs(startOfSlot); pointer.isBefore(dayjs(endOfSlot)); pointer = endTimeslot(pointer)) {
+    for (let pointer = dayjs(startOfSlot); endTimeslot(pointer).isBefore(dayjs(endOfSlot)); pointer = endTimeslot(pointer)) {
       const end = endTimeslot(pointer)
 
       additionalSlots.push({

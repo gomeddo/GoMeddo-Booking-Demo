@@ -135,3 +135,43 @@ pre code {
     width: 2.8rem;
     height: 2.8rem;
 }
+
+form#config {
+    display: grid;
+    gap: 3.2rem;
+    padding: 6.4rem 19.7rem;
+    border-radius: 0.4rem;
+    background-color: #12726A;
+    margin-top: 4rem;
+}
+
+form#config[hidden] {
+    display: none;
+}
+
+form#config h3 {
+    color: #ffffff;
+}
+
+form#config input, form#config select {
+    border-radius: 2.4rem;
+    padding: 1.6rem 3.2rem;
+    font-size: 1.4rem;
+    border: none;
+}
+
+input:focus-visible {
+    outline: 0.2rem solid #7bd1fd;
+}
+
+form#config button {
+    padding: 1.6rem 2.2rem;
+    line-height: 1.6rem;
+    border-radius: 2.4rem;
+
+    background-color: #000000;
+    border: none;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 315;
+}
