@@ -21,7 +21,7 @@ export default function ConfigProvider ({ children, ...providedConfig }: PropsWi
   const config = useMemo(() => ({
     ...defaultConfig,
     ...providedConfig
-  }), [])
+  }), [providedConfig])
 
   console.debug('Config', config)
 

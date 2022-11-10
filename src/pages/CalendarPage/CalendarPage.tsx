@@ -53,7 +53,7 @@ export default function CalendarPage (): JSX.Element {
       .sort(({ start: startA }, { start: startB }) => (
         startA.unix() - startB.unix()
       )) ?? []
-  ), [data])
+  ), [data, timeslotLength])
 
   useEffect(() => {
     if (timeslots.length > 0 && date === undefined) {

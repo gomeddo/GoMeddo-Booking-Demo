@@ -4,5 +4,5 @@ import { ConfigContext } from '../context/ConfigProvider'
 
 export default function useBooker25 (): Booker25 {
   const { apiKey, environment } = useContext(ConfigContext)
-  return useMemo(() => new Booker25(apiKey, environment), [])
+  return useMemo(() => new Booker25(apiKey, environment), [apiKey, environment])
 }
