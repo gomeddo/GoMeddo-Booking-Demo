@@ -23,7 +23,7 @@ export function calcTimeslots (resource?: Resource, timeslotLength?: number): Ti
     .filter(({ type }) => type === AvailabilitySlotType.OPEN)
     .reduce<Timeslot[]>((slots, { startOfSlot, endOfSlot }) => {
     const additionalSlots: Timeslot[] = []
-    for (let pointer = dayjs(startOfSlot); pointer.isBefore(dayjs(endOfSlot)); pointer = endTimeslot(pointer)) {
+    for (let pointer = dayjs(startOfSlot); endTimeslot(pointer).isBefore(dayjs(endOfSlot)); pointer = endTimeslot(pointer)) {
       const end = endTimeslot(pointer)
 
       additionalSlots.push({
