@@ -1,0 +1,15 @@
+name: Publish to Github Pages
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies and build
+        run: |
+          yarn install
+          yarn build
