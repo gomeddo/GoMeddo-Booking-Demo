@@ -13,8 +13,10 @@ import 'dayjs/locale/fr'
 
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import ConfigProvider, { Config } from './context/ConfigProvider'
+import { Environment } from '@booker25/sdk'
 
-function render (rootElement: HTMLElement | ShadowRoot): ReactDOM.Root {
+function render (rootElement: HTMLElement | ShadowRoot, config: Partial<Config> = {}): ReactDOM.Root {
   dayjs.extend(isSameOrBefore)
   dayjs.extend(localizedFormat)
 
@@ -25,7 +27,9 @@ function render (rootElement: HTMLElement | ShadowRoot): ReactDOM.Root {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <ConfigProvider {...config}>
+          <App />
+        </ConfigProvider>
       </QueryClientProvider>
     </React.StrictMode>
   )
@@ -60,7 +64,34 @@ if (process.env.REACT_APP_CUSTOM_ELEMENT === '1') {
   window.customElements.define('sales-appointment', SalesAppointment)
 } else {
   const root = document.getElementById('sales-appointment')
+  let reactRoot: ReactDOM.Root | undefined
+
+  const mutationObserver = new MutationObserver(([{ target }]) => {
+    const element = target as HTMLElement
+
+    const apiKey = element.getAttribute('data-api-key')
+    const environment = element.getAttribute('data-environment')
+    const resources = element.getAttribute('data-resources')
+    const timeslotLength = element.getAttribute('data-timeslot-length')
+
+    reactRoot?.unmount()
+    reactRoot = render(element, {
+      apiKey: apiKey ?? undefined,
+      environment: environment !== null ? Environment[(environment) as keyof typeof Environment] : undefined,
+      resources: resources?.split(';') ?? undefined,
+      timeslotLength: timeslotLength !== null ? parseInt(timeslotLength) : undefined
+    })
+  })
+
   if (root !== null) {
-    render(root)
+    reactRoot = render(root)
+    mutationObserver.observe(root, {
+      attributeFilter: [
+        'data-environment',
+        'data-api-key',
+        'data-resources',
+        'data-timeslot-length'
+      ]
+    })
   }
 }
