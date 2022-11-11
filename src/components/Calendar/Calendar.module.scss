@@ -87,13 +87,18 @@
     height: 4rem;
     width: 4rem;
 
-
     font-size: 1.4rem;
 
     border: 2px solid lighten($dark-bg, 16%);
     color: $light-fg;
 
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 100%;
 
     @media (max-width: $mobile) {
       height: 3.4rem;

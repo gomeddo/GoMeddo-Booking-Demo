@@ -176,3 +176,8 @@ form#config button {
     font-size: 1.6rem;
     font-weight: 315;
 }
+
+#sales-appointment, sales-appointment {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
