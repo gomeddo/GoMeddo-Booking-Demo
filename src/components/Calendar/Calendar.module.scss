@@ -1,5 +1,6 @@
 @import '../../colors';
 @import '../../spacing';
+@import '../../breakpoints';
 
 .calendar {
   display: grid;
@@ -21,6 +22,10 @@
     font-size: 2rem;
     line-height: 40rem;
     font-family: 'ITC Avant Garde Pro MD', sans-serif;
+
+    @media (max-width: $mobile) {
+      font-size: 1.7rem;
+    }
   }
 
   &Controls {
@@ -30,6 +35,10 @@
     align-items: center;
 
     font-size: 1.4rem;
+
+    @media (max-width: $mobile) {
+      font-size: 1.2rem;
+    }
 
     button {
       cursor: pointer;
@@ -54,12 +63,21 @@
     grid-template-columns: repeat(7, 1fr);
 
     gap: 2rem;
+    overflow-x: auto;
+
+    @media (max-width: $mobileLandscape) {
+      gap: 1rem
+    }
   }
 
   &Header {
     text-align: center;
     font-size: 1.6rem;
     line-height: 4rem;
+
+    @media (max-width: $mobile) {
+      font-size: 1.36rem;
+    }
   }
 
   &Day {
@@ -69,12 +87,19 @@
     height: 4rem;
     width: 4rem;
 
+
     font-size: 1.4rem;
 
     border: 2px solid lighten($dark-bg, 16%);
     color: $light-fg;
 
     cursor: pointer;
+
+    @media (max-width: $mobile) {
+      height: 3.4rem;
+      width: 3.4rem;
+      font-size: 1.2rem;
+    }
 
     &[disabled] {
       opacity: 0.2;

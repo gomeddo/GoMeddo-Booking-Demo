@@ -1,4 +1,5 @@
 @import "../../colors";
+@import "../../breakpoints";
 
 .contactForm {
   left: 100%;
@@ -6,6 +7,15 @@
 
   color: $light-fg;
   padding: 6.4rem 19.7rem;
+
+
+  @media (max-width: $tablet) {
+    padding: 4rem 8rem;
+  }
+
+  @media (max-width: $mobileLandscape) {
+    padding: 4rem 1.6rem;
+  }
 
   &Active {
     position: relative;
@@ -17,6 +27,10 @@
     font-size: 3.2rem;
     font-weight: 500;
     font-family: 'ITC Avant Garde Pro MD', sans-serif;
+
+    @media (max-width: $mobile) {
+      font-size: 2.4rem;
+    }
   }
 
   &Controls {
@@ -27,6 +41,16 @@
     gap: 1.6rem;
     margin-top: 4rem;
     margin-bottom: 5.6rem;
+
+    @media (max-width: $mobileLandscape) {
+      grid-template-columns: 4rem auto;
+      grid-template-areas: "back date";
+      margin: 1.6rem 3.9rem 3.2rem;
+    }
+
+    @media (max-width: $mobile) {
+      margin: 1.6rem 0 3.2rem;
+    }
 
     &Back {
       grid-area: back;
@@ -48,10 +72,17 @@
       background: $dark-bg;
       display: flex;
       align-items: center;
-      padding: 0 5.6rem;
+      justify-content: center;
       border-radius: 2rem;
       font-size: 1.6rem;
       font-weight: 315;
+      white-space: nowrap;
+      overflow-x: auto;
+      padding: 0 1.6rem;
+
+      @media (max-width: $mobile) {
+        font-size: 1.2rem;
+      }
     }
   }
 
@@ -61,12 +92,17 @@
 
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: auto;
+
+    @media (max-width: $tablet) {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 1.6rem;
+    }
   }
 
   &Notes {
     font-family: sans-serif;
     resize: none;
-
   }
 
   &Submit {
@@ -93,7 +129,7 @@
   left: 0;
   right: 0;
 
-  padding: 3.2rem;
+  padding: 4rem;
 
   display: flex;
   flex-flow: column nowrap;
@@ -118,6 +154,11 @@
     text-align: center;
     font-family: 'ITC Avant Garde Pro MD', sans-serif;
     line-height: 5rem;
+
+    @media (max-width: $mobile) {
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+    }
   }
 
   &Time {
@@ -131,10 +172,21 @@
     font-size: 1.6rem;
     font-weight: 315;
     border-radius: 2.4rem;
+
+    @media (max-width: $mobile) {
+      padding: 1.6rem 3.2rem;
+      font-size: 1.4rem;
+    }
+
   }
 
   &Icon {
     width: 4rem;
     height: 4rem;
+
+    @media (max-width: $mobile) {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
   }
 }

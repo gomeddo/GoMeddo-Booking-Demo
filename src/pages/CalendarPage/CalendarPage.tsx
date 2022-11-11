@@ -116,7 +116,7 @@ export default function CalendarPage (): JSX.Element {
         />
       </div>
       <div className={style.firstSlotFinder}>
-        <span>Search first available time slot</span>
+        <span>Select first available time slot</span>
         <LoaderButton
           className={style.firstSlotFinderSearch}
           onClick={() => {
@@ -127,7 +127,7 @@ export default function CalendarPage (): JSX.Element {
             }
           }}
         >
-          Search
+          Select
         </LoaderButton>
       </div>
       <div className={style.timeslotsHeader}>
@@ -177,21 +177,23 @@ export default function CalendarPage (): JSX.Element {
         />
       </div>
       <div className={style.selectedTimeslot}>
-        <div className={style.selectedTimeslotDateTime}>
-          {
-            selectedTimeslot !== undefined ? (
-              <>
-                {selectedTimeslot?.start?.format('L')}
-                {' - '}
-                {selectedTimeslot?.start?.format('LT')}
-                {' - '}
-                {selectedTimeslot?.end?.format('LT')}
-              </>
-            )
-              : (
-                date?.format('L') ?? 'Loading...'
+        <div className={style.selectedTimeslotDateTimeWrapper}>
+          <div className={style.selectedTimeslotDateTime}>
+            {
+              selectedTimeslot !== undefined ? (
+                <>
+                  {selectedTimeslot?.start?.format('L')}
+                  {' - '}
+                  {selectedTimeslot?.start?.format('LT')}
+                  {' - '}
+                  {selectedTimeslot?.end?.format('LT')}
+                </>
               )
-          }
+                : (
+                  date?.format('L') ?? 'Loading...'
+                )
+            }
+          </div>
         </div>
         <LoaderButton
           className={style.selectedTimeslotNext}

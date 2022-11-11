@@ -1,5 +1,6 @@
 @import "../../colors";
 @import "../../spacing";
+@import "../../breakpoints";
 
 .calendar {
   left: -100%;
@@ -11,6 +12,18 @@
           "calendar timeslotsHeader"
           "calendar timeslots"
           "firstSlotFinder selectedTimeslot";
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto $calendarHeaderHeight auto auto;
+
+    grid-template-areas:
+      "calendar"
+      "firstSlotFinder"
+      "timeslotsHeader"
+      "timeslots"
+      "selectedTimeslot";
+  }
 
   &Active {
     left: 0;
@@ -25,6 +38,10 @@
   background-color: $dark-bg;
   color: $light-fg;
   padding: 0 4rem 4rem;
+
+  @media (max-width: $mobile) {
+    padding: 0 1.6rem 1.6rem;
+  }
 }
 
 .firstSlotFinder {
@@ -34,6 +51,10 @@
   display: grid;
   grid-template-columns: 1fr auto;
   padding: 0.8rem 4rem 1.6rem;
+
+  @media (max-width: $mobile) {
+    padding: 0.8rem 2rem 1.6rem;
+  }
 
   span {
     color: $light-fg;
@@ -83,6 +104,10 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+
+    @media (max-width: $mobile) {
+      font-size: 1.4rem;
+    }
   }
 
   ol {
@@ -103,6 +128,15 @@
     column-gap: 1.8rem;
     row-gap: 3.2rem;
 
+    @media (max-width: $mobile) {
+      column-gap: 1.2rem;
+      row-gap: 1.6rem;
+      padding: 0 1.6rem 4rem 1.6rem;
+    }
+
+    @media (max-width: $tablet) {
+      position: static;
+    }
   }
 
   &Timeslot {
@@ -112,6 +146,10 @@
     --loader-button-color: $dark-bg;
     --loader-button-padding: 1.2rem;
     --loader-button-font-size: 1.4rem;
+
+    @media (max-width: $mobile) {
+      --loader-button-font-size: 1rem;
+    }
 
     &:hover {
       --loader-button-hover-background-color: #{darken($light-fg, 10%)};
@@ -154,7 +192,13 @@
 
   grid-template-columns: 1fr auto;
   grid-area: selectedTimeslot;
+
   background-color: $accent;
+
+  @media (max-width: $mobileLandscape) {
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+  }
 
   &DateTime {
     text-align: center;
@@ -167,6 +211,20 @@
     justify-content: center;
     align-items: center;
     font-size: 1.6rem;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    @media (max-width: $mobileLandscape) {
+      margin: 1.6rem 2rem;
+
+      &Wrapper {
+        background-color: $alt-bg;
+      }
+    }
+
+    @media (max-width: $mobile) {
+      font-size: 1.2rem;
+    }
   }
 
   &Next {
@@ -178,6 +236,13 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: $mobileLandscape) {
+      --loader-button-padding: 2.2rem 3.2rem;
+      justify-content: space-between;
+    }
 
     &:hover {
       --loader-button-hover-background-color: #{darken($accent, 10%)};

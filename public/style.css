@@ -104,6 +104,7 @@ pre {
 
     border-radius: 0.4rem;
     white-space: pre-line;
+    overflow-x: auto;
 }
 
 pre code:before {
