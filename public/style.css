@@ -120,7 +120,7 @@ pre code {
 
 .view-on-github {
     display: flex;
-    background-color: #FF620A;
+    background-color: #FF512F;
     color: #ffffff;
     height: 100%;
     justify-content: center;
@@ -142,7 +142,7 @@ form#config {
     gap: 3.2rem;
     padding: 6.4rem 19.7rem;
     border-radius: 0.4rem;
-    background-color: #12726A;
+    background-color: #16072D;
     margin-top: 4rem;
 }
 
@@ -162,7 +162,7 @@ form#config input, form#config select {
 }
 
 input:focus-visible {
-    outline: 0.2rem solid #7bd1fd;
+    outline: 0.2rem solid #9BCFFF;
 }
 
 form#config button {
@@ -170,7 +170,7 @@ form#config button {
     line-height: 1.6rem;
     border-radius: 2.4rem;
 
-    background-color: #000000;
+    background-color: #9BCFFF;
     border: none;
     color: #ffffff;
     font-size: 1.6rem;
