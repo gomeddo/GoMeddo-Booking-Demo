@@ -1,9 +1,9 @@
 {
-  "name": "booker25-demo-appointment",
+  "name": "GoMeddo-demo-appointment",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@booker25/sdk": "^0.0.5",
+    "@gomeddo/sdk": "^0.0.6",
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

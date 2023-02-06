@@ -13,17 +13,17 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="%PUBLIC_URL%/style.css" />
     <script src="%PUBLIC_URL%/script.js"></script>
-    <title>Booker25 JS SDK Example</title>
+    <title>GoMeddo JS SDK Example</title>
   </head>
   <body>
   <header>
     <div>
-      <object data="%PUBLIC_URL%/booker25.svg" type="image/svg+xml"></object>
+      <object data="%PUBLIC_URL%/gomeddo.svg" type="image/svg+xml"></object>
       <h2>
         JS SDK Example
       </h2>
     </div>
-    <a class="view-on-github" href="https://github.com/booker25/js-sdk-example">
+    <a class="view-on-github" href="https://github.com/gomeddo/js-sdk-example">
       <img src="%PUBLIC_URL%/github.png"  alt="github" />
       View on GitHub
     </a>
@@ -31,8 +31,8 @@
   <main>
     <section>
       <div>
-        <h1>Booker25 JS SDK</h1>
-        <p>This page shows an example on how to implement the Booker25 JS SDK</p>
+        <h1>GoMeddo JS SDK</h1>
+        <p>This page shows an example on how to implement the GoMeddo JS SDK</p>
       </div>
     </section>
     <section>
@@ -59,12 +59,12 @@
         <h3>Installing the SDK</h3>
         <h4>NPM</h4>
         <pre>
-          npm install @booker25/sdk
+          npm install @gomeddo/sdk
         </pre>
 
         <h4>Yarn</h4>
         <pre>
-          yarn add @booker25/sdk
+          yarn add @gomeddo/sdk
         </pre>
       </div>
     </section>
@@ -72,11 +72,11 @@
       <div>
         <h3>Getting timeslots for a specific resource and day</h3>
         <pre>
-          <code>import Booker25 from '@booker25/sdk';</code>
+          <code>import GoMeddo from '@gomeddo/sdk';</code>
           <code></code>
-          <code>const b25 = new Booker25(apiKey);</code>
+          <code>const gm = new GoMeddo(apiKey);</code>
           <code></code>
-          <code>b25</code>
+          <code>gm</code>
           <code>  .buildResourceRequest()</code>
           <code>  .includeAllResourcesAt(resourceId)</code>
           <code>  .withAvailableSlotsBetween(</code>
@@ -92,9 +92,9 @@
       <div>
         <h3>Creating a reservation</h3>
         <pre>
-          <code>import Booker25, { Reservation, Lead } from '@booker25/sdk';</code>
+          <code>import GoMeddo, { Reservation, Lead } from '@gomeddo/sdk';</code>
           <code></code>
-          <code>const b25 = new Booker25(apiKey);</code>
+          <code>const gm = new GoMeddo(apiKey);</code>
           <code></code>
           <code>const resource = resources[0];</code>
           <code>const timeslots = resource.getTimeSlots();</code>
@@ -107,7 +107,7 @@
           <code>const lead = new Lead(firstName, lastName, email);</code>
           <code>reservation.setLead(lead);</code>
           <code></code>
-          <code>b25</code>
+          <code>gm</code>
           <code>  .saveReservation(reservation)</code>
           <code>  .then((response) => /* Do something with the response */);</code>
         </pre>

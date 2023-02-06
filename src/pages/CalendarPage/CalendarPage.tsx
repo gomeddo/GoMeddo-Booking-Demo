@@ -1,10 +1,10 @@
-import useBooker25 from '../../hooks/useBooker25'
+import useGoMeddo from '../../hooks/useGoMeddo'
 import { Ref, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import { useQuery } from 'react-query'
 import { calcTimeslots, Timeslot } from '../../utils'
 import { AppointmentContext } from '../../context/AppointmentProvider'
-import Reservation from '@booker25/sdk/dist/cjs/s-objects/reservation'
+import Reservation from '@gomeddo/sdk/dist/cjs/s-objects/reservation'
 import Page from '../Page/Page'
 import style from './CalendarPage.module.scss'
 import Calendar, { CalendarApi } from '../../components/Calendar/Calendar'
@@ -16,7 +16,7 @@ import LoaderButton from '../../components/LoaderButton/LoaderButton'
 import { ConfigContext } from '../../context/ConfigProvider'
 
 export default function CalendarPage (): JSX.Element {
-  const b25 = useBooker25()
+  const gm = useGoMeddo()
 
   const { setReservation, reservation } = useContext(AppointmentContext)
 
@@ -31,7 +31,7 @@ export default function CalendarPage (): JSX.Element {
   const { isLoading, data } = useQuery(
     ['resources', calendarStart.format('YYYY-MM-DD'), calendarEnd.format('YYYY-MM-DD')],
     async () => {
-      return await b25
+      return await gm
         .buildResourceRequest()
         .includeAllResourcesAt(...resources)
         .withAvailableSlotsBetween(

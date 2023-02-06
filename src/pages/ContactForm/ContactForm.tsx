@@ -1,9 +1,9 @@
 import dayjs from 'dayjs'
-import Reservation from '@booker25/sdk/dist/cjs/s-objects/reservation'
+import Reservation from '@gomeddo/sdk/dist/cjs/s-objects/reservation'
 import { PropsWithChildren, useContext, useMemo, useState } from 'react'
 import { useMutation } from 'react-query'
-import Lead from '@booker25/sdk/dist/cjs/s-objects/lead'
-import useBooker25 from '../../hooks/useBooker25'
+import Lead from '@gomeddo/sdk/dist/cjs/s-objects/lead'
+import useGoMeddo from '../../hooks/useGoMeddo'
 import { Input } from '../../components/Input/Input'
 import { AppointmentContext } from '../../context/AppointmentProvider'
 import Page from '../Page/Page'
@@ -48,7 +48,7 @@ function ActionComplete ({ variant, onBack, children }: PropsWithChildren<Action
 export default function ContactForm (): JSX.Element {
   const { reservation, setReservation } = useContext(AppointmentContext)
 
-  const b25 = useBooker25()
+  const gm = useGoMeddo()
 
   const [showSuccess, setShowSuccess] = useState(false)
   const [showError, setShowError] = useState(false)
@@ -62,7 +62,7 @@ export default function ContactForm (): JSX.Element {
   const [tos, setTos] = useState(false)
 
   const reservationMutation = useMutation(async (data: Reservation) => {
-    return await b25.saveReservation(data)
+    return await gm.saveReservation(data)
   }, {
     onSuccess: async (data) => setShowSuccess(true),
     onError: async () => setShowError(true)
@@ -214,13 +214,13 @@ export default function ContactForm (): JSX.Element {
               Dear Visitor,
             </span>
             <p>
-              Currently, we’re experiencing difficulties with our demo requests. Please contact us via info@booker25.com if you would like to make a reservation for a demo. You can also contact us by phone at +31 20 750 8350 or try again.
+              Currently, we’re experiencing difficulties with our demo requests. Please contact us via info@gomeddo.com if you would like to make a reservation for a demo. You can also contact us by phone at +31 20 750 8350 or try again.
             </p>
             <p>
               Apologies for any inconvenience caused,
             </p>
             <p>
-              Team Booker25
+              Team GoMeddo
             </p>
           </ActionComplete>
         )

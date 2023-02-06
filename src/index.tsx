@@ -14,7 +14,7 @@ import 'dayjs/locale/fr'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import ConfigProvider, { Config } from './context/ConfigProvider'
-import { Environment } from '@booker25/sdk'
+import { Environment } from '@gomeddo/sdk'
 
 function render (rootElement: HTMLElement | ShadowRoot, config: Partial<Config> = {}): ReactDOM.Root {
   dayjs.extend(isSameOrBefore)
