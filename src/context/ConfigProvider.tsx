@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useMemo } from 'react'
-import { Environment } from '@booker25/sdk'
+import { Environment } from '@gomeddo/sdk'
 
 export interface Config {
   apiKey: string

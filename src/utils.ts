@@ -1,6 +1,6 @@
-import { AvailabilitySlotType } from '@booker25/sdk/dist/cjs/time-slots/availability-time-slot'
+import { AvailabilitySlotType } from '@gomeddo/sdk/dist/cjs/time-slots/availability-time-slot'
 import dayjs, { Dayjs } from 'dayjs'
-import Resource from '@booker25/sdk/dist/cjs/s-objects/resource'
+import Resource from '@gomeddo/sdk/dist/cjs/s-objects/resource'
 
 export interface Timeslot {
   id: string

@@ -1,5 +1,5 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react'
-import Reservation from '@booker25/sdk/dist/cjs/s-objects/reservation'
+import Reservation from '@gomeddo/sdk/dist/cjs/s-objects/reservation'
 
 interface AppointmentApi {
   reservation: Reservation | undefined
