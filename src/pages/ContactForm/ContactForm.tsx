@@ -106,7 +106,7 @@ export default function ContactForm (): JSX.Element {
             lead.setCustomProperty('MobilePhone', phone)
             reservation?.setLead(lead)
 
-            reservation.setCustomProperty('gm__Notes__c', notes)
+            reservation.setCustomProperty('B25__Notes__c', notes)
 
             await reservationMutation.mutateAsync(reservation)
           }
