@@ -35,7 +35,7 @@
   grid-area: calendar;
   flex-shrink: 0;
   flex-grow: 0;
-  background-color: $dark-bg;
+  background-color: $alt-bg;
   color: $light-fg;
   padding: 0 4rem 4rem;
 
@@ -46,11 +46,11 @@
 
 .firstSlotFinder {
   grid-area: firstSlotFinder;
-  background-color: $dark-bg;
+  background-color: $alt-bg;
 
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 0.8rem 4rem 1.6rem;
+  padding: 1.6rem 4rem 1.6rem;
 
   @media (max-width: $mobile) {
     padding: 0.8rem 2rem 1.6rem;
@@ -61,14 +61,22 @@
     display: flex;
     align-items: center;
     font-size: 1.4rem;
-    margin-top: 0.8rem;
+    // margin-top: 0.8rem;
   }
 
   &Search {
-    --loader-button-padding: 1rem 3.6rem;
-    --loader-button-border: 1px solid #{$light-fg};
-    --loader-button-border-radius: 2.5rem;
+    --loader-button-padding: 0rem 3.6rem;
+    --loader-button-border: 1px solid #{$border-0-state};
+    --loader-button-background-color: #{$alt-bg};
+    --loader-button-color: #{$light-fg};
+    --loader-button-border-radius: 3rem;
     --loader-button-line-height: 2.8rem;
+    --loader-button-hover-background-color: #{$light-fg};
+    --loader-button-hover-color: #{$dark-bg};
+
+    @media (max-width: $tablet) {
+      --loader-button-padding: 1rem 3.6rem;
+    }
   }
 }
 
@@ -147,25 +155,18 @@
     width: 100%;
     --loader-button-border-radius: 0.6rem;
     --loader-button-background-color: #{$light-fg};
-    --loader-button-color: $dark-bg;
+    --loader-button-color: #{$dark-bg};
     --loader-button-padding: 1.2rem;
     --loader-button-font-size: 1.4rem;
+    --loader-button-hover-background-color: #{$accent2};
+    --loader-button-hover-color: #{$dark-bg};
 
     @media (max-width: $mobile) {
       --loader-button-font-size: 1rem;
     }
 
-    &:hover {
-      --loader-button-hover-background-color: #{darken($light-fg, 10%)};
-    }
-
     &Selected {
       --loader-button-background-color: #{$accent};
-      --loader-button-color: #{$light-fg};
-
-      &:hover {
-        --loader-button-hover-background-color: #{darken($accent, 10%)};
-      }
     }
   }
 
@@ -196,6 +197,8 @@
 
   grid-template-columns: 1fr auto;
   grid-area: selectedTimeslot;
+  padding: 1.6rem 4rem;
+  gap: 2rem;
 
   background-color: $accent;
 
@@ -207,24 +210,18 @@
   &DateTime {
     text-align: center;
     padding: 0 1.6rem;
-    background-color: $light-fg;
-    margin: 1.6rem 4rem;
+    background-color: $alt-bg;
+    color: $light-fg;
     border-radius:3.2rem;
-    line-height: 4rem;
+    line-height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.6rem;
     overflow-x: auto;
     white-space: nowrap;
+    align-self: stretch;
 
-    @media (max-width: $mobileLandscape) {
-      margin: 1.6rem 2rem;
-
-      &Wrapper {
-        background-color: $alt-bg;
-      }
-    }
 
     @media (max-width: $mobile) {
       font-size: 1.2rem;
@@ -232,10 +229,9 @@
   }
 
   &Next {
-    --loader-button-border-radius: 0;
-    --loader-button-background-color: #{$accent};
-
-    --loader-button-padding: 2.2rem 7rem 2.2rem 3.2rem;
+    --loader-button-border-radius: 10rem;
+    --loader-button-padding: 0rem 2.6rem;
+    --loader-button-background-color: #{$light-fg};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,12 +240,7 @@
     z-index: 1;
 
     @media (max-width: $mobileLandscape) {
-      --loader-button-padding: 2.2rem 3.2rem;
-      justify-content: space-between;
-    }
-
-    &:hover {
-      --loader-button-hover-background-color: #{darken($accent, 10%)};
+      --loader-button-padding: 1.6rem 3.2rem;
     }
   }
 }

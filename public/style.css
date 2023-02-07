@@ -16,9 +16,10 @@ main, header, footer {
 }
 
 header {
-    background: #000;
+    background: #16072D;
     display: grid;
     grid-template-columns: 1fr auto;
+    height: 10rem;
 }
 
 section {
@@ -46,10 +47,15 @@ header > div {
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    padding-top: 2.2rem;
-    padding-bottom: 2.2rem;
+    padding-top: 3.8rem;
+    padding-bottom: 3.8rem;
+    padding-left: 6.4rem;
     flex-shrink: 1;
     flex-grow: 1;
+}
+
+header > div > object {
+    height: 2.4rem;
 }
 
 section h2, section h3 {
@@ -121,7 +127,7 @@ pre code {
 .view-on-github {
     display: flex;
     background-color: #FF512F;
-    color: #ffffff;
+    color: #000000;
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -129,12 +135,16 @@ pre code {
     padding: 0 6.6rem 0 3.2rem;
     font-size: 1.6rem;
     text-decoration: unset;
+}
 
+.view-on-github:hover {
+    background-color: #9BCFFF;
 }
 
 .view-on-github img {
     width: 2.8rem;
     height: 2.8rem;
+    filter: invert(1)
 }
 
 form#config {

@@ -1,0 +1,38 @@
+@import '../../colors';
+
+.button {
+  width: var(--arrow-button-width, 3rem);
+  height: var(--arrow-button-height, 3rem);
+  display: flex;
+  align-items: center;
+  border-radius: var(--arrow-button-radius, 1.5rem);
+  border: var(--arrow-button-border, 1px solid #{$border-0-state});
+  background-color: transparent;
+  justify-content: center;
+  font-weight: 315;
+
+  cursor: pointer;
+
+  &Left {
+    transform: rotate(180deg);
+  }
+
+  &Right {
+    transform: rotate(0deg);
+  }
+
+  &[disabled] {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: var(--arrow-button-hover-background-color, #{$light-fg});
+    border: var(--arrow-button-border, 1px solid $light-fg);
+    color: var(--arrow-button-hover-color, #{$dark-bg});
+
+    svg {
+      filter: invert(1);
+    }
+  }
+}

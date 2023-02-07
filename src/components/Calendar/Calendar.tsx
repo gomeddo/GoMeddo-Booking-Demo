@@ -4,8 +4,7 @@ import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 
 import useCalendar from '../../hooks/useCalendar'
 import classnames from 'classnames'
 
-import { ReactComponent as ChevronLeft } from '../../icons/chevron-left.svg'
-import { ReactComponent as ChevronRight } from '../../icons/chevron-right.svg'
+import ArrowButton from '../ArrowButton/ArrowButton'
 
 export interface CalendarApi {
   setCalendarMonth: (date: Dayjs) => void
@@ -67,23 +66,21 @@ const Calendar = forwardRef<CalendarApi, CalendarProps>(({ onDateSelect, classNa
     <div className={classnames(style.calendar, className)}>
       <span className={style.calendarTitle}>Select a Date</span>
       <div className={style.calendarControls}>
-        <button
+        <ArrowButton
+          direction='left'
           onClick={() => prevMonth !== undefined && setCalendarDate(prevMonth)}
           disabled={prevMonth === undefined}
-        >
-          <ChevronLeft />
-        </button>
+        />
         <div>
           {calendarDate.format('MMMM')}
           {' '}
           {!calendarDate.isSame(dayjs(), 'year') && calendarDate.format('YYYY')}
         </div>
-        <button
+        <ArrowButton
+          direction='right'
           onClick={() => nextMonth !== undefined && setCalendarDate(nextMonth)}
           disabled={nextMonth === undefined}
-        >
-          <ChevronRight />
-        </button>
+        />
       </div>
       <div className={style.calendarContent}>
         {
