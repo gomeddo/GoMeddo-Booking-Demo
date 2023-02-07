@@ -11,7 +11,7 @@ import Calendar, { CalendarApi } from '../../components/Calendar/Calendar'
 import classnames from 'classnames'
 import Loader from '../../components/Loader/Loader'
 
-import { ReactComponent as ArrowWhite } from '../../icons/arrow-white.svg'
+import { ReactComponent as ArrowBlack } from '../../icons/arrow-black.svg'
 import LoaderButton from '../../components/LoaderButton/LoaderButton'
 import { ConfigContext } from '../../context/ConfigProvider'
 
@@ -211,7 +211,7 @@ export default function CalendarPage (): JSX.Element {
           })}
         >
           Next
-          <ArrowWhite />
+          <ArrowBlack />
         </LoaderButton>
       </div>
     </Page>

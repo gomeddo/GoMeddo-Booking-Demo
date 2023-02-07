@@ -5,10 +5,10 @@
   line-height: var(--loader-button-line-height, 1.6rem);
   border-radius: var(--loader-button-border-radius, 2.4rem);
 
-  background-color: var(--loader-button-background-color, #{$dark-bg});
+  background-color: var(--loader-button-background-color, #{$accent});
   border: var(--loader-button-border, none);
-  color: var(--loader-button-color, #{$light-fg});
-  font-size: var(--loader-button-font-size, 1.6rem);
+  color: var(--loader-button-color, #{$dark-bg});
+  font-size: var(--loader-button-font-size, 1.4rem);
   font-weight: 315;
 
   cursor: pointer;
@@ -24,6 +24,7 @@
   }
 
   &:hover {
-    background-color: var(--loader-button-hover-background-color, #{lighten($dark-bg, 20%)});
+    background-color: var(--loader-button-hover-background-color, #{$accent2});
+    color: var(--loader-button-hover-color, #{$dark-bg});
   }
 }

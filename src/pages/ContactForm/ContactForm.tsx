@@ -8,7 +8,6 @@ import { Input } from '../../components/Input/Input'
 import { AppointmentContext } from '../../context/AppointmentProvider'
 import Page from '../Page/Page'
 
-import { ReactComponent as Back } from '../../icons/arrow-back-round.svg'
 import { ReactComponent as Error } from '../../icons/error.svg'
 import { ReactComponent as Success } from '../../icons/success.svg'
 
@@ -17,6 +16,7 @@ import { TextArea } from '../../components/TextArea/TextArea'
 import classnames from 'classnames'
 import { Checkbox } from '../../components/Checkbox/Checkbox'
 import LoaderButton from '../../components/LoaderButton/LoaderButton'
+import ArrowButton from '../../components/ArrowButton/ArrowButton'
 
 interface ActionCompleteSuccess {
   variant: 'success'
@@ -79,12 +79,11 @@ export default function ContactForm (): JSX.Element {
     >
       <div className={style.contactFormTitle}>Confirm your booking</div>
       <div className={style.contactFormControls}>
-        <LoaderButton
+        <ArrowButton
           className={style.contactFormControlsBack}
+          direction='left'
           onClick={() => setReservation(undefined)}
-        >
-          <Back />
-        </LoaderButton>
+        />
         <span>
           {start?.format('L')}
           {' - '}

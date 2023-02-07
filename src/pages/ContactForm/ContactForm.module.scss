@@ -54,22 +54,16 @@
 
     &Back {
       grid-area: back;
-      --loader-button-border-radius: 100%;
-      --loader-button-background-color: #{$alt-bg};
-      --loader-button-padding: 0;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:hover {
-        --loader-button-hover-background-color: #{darken($alt-bg, 5%)}
-      }
+      --arrow-button-width: 4rem;
+      --arrow-button-height: 4rem;
+      --arrow-button-radius: 2rem;
     }
 
     span {
       grid-area: date;
-      background: $dark-bg;
+      background: $accent2;
+      color: $dark-bg;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -78,7 +72,7 @@
       font-weight: 315;
       white-space: nowrap;
       overflow-x: auto;
-      padding: 0 1.6rem;
+      padding: 0 2.6rem;
 
       @media (max-width: $mobile) {
         font-size: 1.2rem;

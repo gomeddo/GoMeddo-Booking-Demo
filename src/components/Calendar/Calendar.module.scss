@@ -35,24 +35,10 @@
     align-items: center;
 
     font-size: 1.4rem;
+    gap: 1rem;
 
     @media (max-width: $mobile) {
       font-size: 1.2rem;
-    }
-
-    button {
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: transparent;
-      border: none;
-      padding: 0 0.8rem;
-
-      &[disabled] {
-        cursor: unset;
-        opacity: 0;
-      }
     }
   }
 
@@ -82,14 +68,14 @@
 
   &Day {
     border-radius: 100%;
-    background-color: $dark-bg;
+    background-color: $alt-bg;
 
     height: 4rem;
     width: 4rem;
 
     font-size: 1.4rem;
 
-    border: 2px solid lighten($dark-bg, 16%);
+    border: 2px solid lighten($alt-bg, 16%);
     color: $light-fg;
 
     cursor: pointer;
@@ -119,12 +105,15 @@
     }
 
     &:hover {
-      background-color: lighten($dark-bg, 16%);
+      background-color: $accent2;
+      border-color: $accent2;
+      color: $dark-bg;
     }
 
     &Selected {
       background-color: $accent;
       border-color: $accent;
+      color: $dark-bg;
     }
   }
 }
