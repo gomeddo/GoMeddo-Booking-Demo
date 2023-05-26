@@ -41,6 +41,7 @@
         <div id="sales-appointment"></div>
         <form id="config" <% process.env.REACT_APP_API_KEY && print('hidden') %>>
           <h3>Configuration</h3>
+          <p>Remember to configure the url %PUBLIC_URL% under whitelisted domains in the welcome.gomeddo.com page.</p>
           <input placeholder="API Key" name="apiKey"/>
           <select name="environment">
             <option value="PRODUCTION" selected>Production</option>

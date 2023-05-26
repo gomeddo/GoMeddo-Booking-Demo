@@ -160,7 +160,7 @@ form#config[hidden] {
     display: none;
 }
 
-form#config h3 {
+form#config h3, form#config p {
     color: #ffffff;
 }
 
